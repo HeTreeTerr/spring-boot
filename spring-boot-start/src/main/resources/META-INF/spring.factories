@@ -1,0 +1,5 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.itcast.springboot.listener.HelloApplicationContextInitializer
+
+org.springframework.boot.SpringApplicationRunListener=\
+  com.itcast.springboot.listener.HelloSpringApplicationRunListener

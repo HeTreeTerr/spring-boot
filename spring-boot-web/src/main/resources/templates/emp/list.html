@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://getbootstrap.com/docs/4.1/examples/dashboard/# -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="https://getbootstrap.com/favicon.ico">-->
+
+    <title>Employee list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link  th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+  <style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+  <body>
+
+    <!--引入抽取的顶部 三种引入属性insert，replace,include
+    insert :将公共片段整个插入到声明引入的元素中
+    replace :替换为公共片段
+    include ：包含，将公共片段的最外层标签去掉
+    ~{}标签内的写法，可以不写
+    行内写法必须加上
+    -->
+    <!-- 引入头部-->
+    <div th:replace="~{commons/bar::topbar}"></div>
+    <!-- 主体部分-->
+    <div class="container-fluid">
+      <div class="row">
+          <!-- 左部-->
+        <!--引入侧边栏,元素选择插入片段
+            可在引入时，设置参数 (activeUrl='emps')
+        -->
+        <div th:replace="~{commons/bar::#sidebar(activeUrl='emps')}"></div>
+        <!-- 右部-->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+          <!-- 列表显示部分-->
+          <h2><span>员工列表</span>
+              <span><a class="btn btn-sm btn-success" th:href="@{/depts}">员工添加</a></span></h2>
+
+          <div class="table-responsive">
+            <!--<span th:text="${emplist.size()}"></span>-->
+            <!--表格-->
+            <table class="table table-striped table-sm" th:if="${emplist.size()}!=0">
+              <!--表头-->
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>姓名</th>
+                  <th>电子邮件</th>
+                  <th>性别</th>
+                  <th>部门</th>
+                  <th>出生日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <!--表体-->
+              <!--<span th:text="${emplist}"></span>-->
+              <tbody>
+
+                <tr th:each="emp:${emplist}">
+                  <td>[[${emp.id}]]</td>
+                  <td>[[${emp.lastName}]]</td>
+                  <td>[[${emp.email}]]</td>
+                  <td>[[${emp.gender==0?'男':'女'}]]</td>
+                  <td>[[${emp.department.deptName}]]</td>
+                  <td>[[${#dates.format(emp.birth, 'yyyy-MM-dd')}]]</td>
+                  <td>
+                    <a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>
+                    <button th:attr="delete_uri=@{/emp/}+${emp.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </main>
+        <form id="deleteEmpForm" action="" method="post">
+          <input type="hidden" name="_method" value="delete"/>
+        </form>
+      </div>
+    </div>
+
+<!--javascript core-->
+    <!--jquery-->
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+    <!--bootstarp.js-->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.js}"></script>
+  <script type="text/javascript">
+    $(function(){
+        //alert(1);
+        $(".deleteBtn").click(function(){
+            if (confirm("确定要删除吗？")) {
+                //删除当前员工
+                //$(this).attr("action",$(this).attr("delete_uri"));
+                //alert("点击了删除按钮");
+                $("#deleteEmpForm").attr("action", $(this).attr("delete_uri")).submit();
+            }
+            return false;
+        });
+    });
+  </script>
+</body></html>

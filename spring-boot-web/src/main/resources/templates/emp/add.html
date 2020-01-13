@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+            <!-- saved from url=(0054)https://getbootstrap.com/docs/4.1/examples/dashboard/# -->
+            <html lang="en" xmlns:th="http://www.thymeleaf.org">
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <meta name="description" content="">
+                <meta name="author" content="">
+                <!--<link rel="icon" href="https://getbootstrap.com/favicon.ico">-->
+
+    <title>Edit Employee</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link  th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+    <!--日期样式-->
+    <link th:href="@{/asserts/css/bootstrap-datetimepicker.css}" rel="stylesheet">
+    <style type="text/css">/* Chart.js */
+    @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body>
+
+<!--引入抽取的顶部 三种引入属性insert，replace,include
+insert :将公共片段整个插入到声明引入的元素中
+replace :替换为公共片段
+include ：包含，将公共片段的最外层标签去掉
+~{}标签内的写法，可以不写
+行内写法必须加上
+-->
+<!-- 引入头部-->
+<div th:replace="~{commons/bar::topbar}"></div>
+<!-- 主体部分-->
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左部-->
+        <!--引入侧边栏,元素选择插入片段
+            可在引入时，设置参数 (activeUrl='emps')
+        -->
+        <div th:replace="~{commons/bar::#sidebar(activeUrl='emps')}"></div>
+        <!-- 右部-->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+            <!-- 列表显示部分-->
+            <h2><span th:text="${emp!=null} ? '员工修改' : '员工添加'"></span></h2>
+
+            <div class="table-responsive">
+                <!-- 需要区分添加和修改，添加不需要回显-->
+
+                <!--员工添加表单-->
+                <form th:action="@{/emp}" method="post">
+                    <input type="hidden" name="_method" value="put" th:if="${emp!=null}">
+                    <input type="hidden" name="id" th:value="${emp.id}" th:if="${emp!=null}">
+                    <!--输入员工姓名-->
+                    <div class="form-group">
+                        <label for="LastName">LastName</label>
+                        <input type="text" class="form-control" id="LastName" name="lastName" th:value="${emp!=null}?${emp.lastName}" placeholder="empName">
+                    </div>
+                    <!--输入邮件-->
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" name="email" th:value="${emp!=null}?${emp.email}" placeholder="name@example.com">
+                    </div>
+                    <!--输入性别-->
+                    <div class="form-group">
+                        <label>Gender</label><br/>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" name="gender" class="form-check-input" value="0" th:checked="${emp!=null}?${emp.gender==0}">
+                            <span>男</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" name="gender" class="form-check-input" value="1" th:checked="${emp!=null}?${emp.gender==1}">
+                            <span>女</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!--部门选择-->
+                    <div class="form-group">
+                        <label for="DepartmentSelect">DepartmentSelect</label>
+                        <!--<span>[[${depts}]]</span>-->
+                        <select class="form-control" id="DepartmentSelect" name="department.id">
+                            <!--提交部门id-->
+                            <option th:each="dept:${depts}" th:text="${dept.deptName}" th:selected="${emp!=null}?${dept.id==emp.department.id}" th:value="${dept.id}"></option>
+                        </select>
+                    </div>
+
+                    <!--出生日期 日期格式需为：2016/12/10 yyyy-MM-dd不管用-->
+                    <div class="form-group">
+                        <label for="Birth">Birth</label>
+                            <input type="text" size="16" class="form-control" id="Birth" name="birth" th:value="${emp!=null}?${#dates.format(emp.birth, 'yyyy-MM-dd')}" placeholder="yyyy-MM-dd" readonly>
+                    </div>
+                    <!--提交按钮-->
+                    <button type="submit" class="btn btn-primary" th:text="${emp!=null}?'修改':'添加'"></button>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- script core-->
+<!--jquery-->
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+<!--bootstarp.js-->
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.js}"></script>
+<!-- 时间控件js-->
+<script type="text/javascript" th:src="@{/asserts/js/bootstrap-datetimepicker.js}"></script>
+<!-- 样式-->
+<script type="text/javascript" th:src="@{/asserts/js/bootstrap-datetimepicker.fr.js}"></script>
+<!--国际化资源文件-->
+<script type="text/javascript" th:src="@{/asserts/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+<script type="text/javascript">
+    // 这里写自己的js，调用时间选择器，也就是激活日期选择器，即为下文的js
+    $(function(){
+       // alert(1);
+        $('#Birth').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',      /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+            minView: "month",//设置只显示到月份
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-left"
+        });
+    });
+</script>
+
+</body></html>
