@@ -15,6 +15,11 @@ public class LoginController {
                         @RequestParam(value = "password") String password,
                         Map<String,Object> map, HttpSession session){
         //System.out.println(username+"--------"+password);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(!StringUtils.isEmpty(username) && "123456".equals(password)){
             session.setAttribute("loginUser",username);
             //登录成功,为防止表单重复提交重定向
