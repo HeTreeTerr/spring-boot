@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>excel</title>
+</head>
+<body>
+<div>
+    <button id="exportUser">导出</button>
+</div>
+<div>
+    <span>导入</span>
+    <form id="fileUpForm" method="post" enctype="multipart/form-data">
+        <!--multiple="multiple"实现选择多个文件-->
+        <input id="file" type="file" name="file"  multiple="multiple">
+        <input id="upfile" type="button" value="上传">
+    </form>
+</div>
+</body>
+<!--jquery-->
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/asserts/js/jquery.form.js}"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#exportUser").click(function () {
+            window.location.href = "/exportUser";
+        });
+
+        $("#upfile").click(
+            function () {
+                alert("点击上传按钮");
+                upfile();
+            }
+        );
+    });
+
+    function upfile() {
+        var formData = new FormData();
+        var files = document.getElementById("file").files;
+        $.each(files,function (index, item) {
+            formData.append("file", item);
+        });
+        $.ajax({
+            type:"post",
+            contentType:false,
+            data:formData,
+            processData : false,
+            url:"/importUser",
+            success:function (data) {
+                alert(data);
+                /*$.each(data,function (index, item) {
+                    $("#img").append('<img src=uploadFiles/'+item+' width="100px"/>');
+                })*/
+            },
+            error:function (xhr, msg) {
+                alert(msg);
+            }
+        })
+    }
+</script>
+</html>
