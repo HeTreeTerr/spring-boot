@@ -1,6 +1,7 @@
 package com.itcast.springboot.controller;
 
 import com.itcast.springboot.entity.User;
+import com.itcast.springboot.enums.SexEnum;
 import com.itcast.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -24,6 +25,10 @@ public class UserController {
     }
     @GetMapping(value = "/user")
     public User insertUser(User user){
+        if(null == user){
+            user = new User();
+        }
+        user.setSex(SexEnum.男);
         User user1 = userRepository.save(user);
         return user1;
     }
