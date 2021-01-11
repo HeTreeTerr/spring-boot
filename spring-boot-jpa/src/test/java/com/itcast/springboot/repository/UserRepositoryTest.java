@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -18,6 +19,18 @@ public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Test
+    public void save(){
+        User user = new User();
+        user.setLastName("hss");
+        user.setEmail("3110708879@qq.com");
+        user.setSex(SexEnum.女);
+        user.setBirthday(new Date());
+        user.setPhone("18628466845");
+        User save = userRepository.save(user);
+        System.out.println(save);
+    }
 
     /**
      * 统计
