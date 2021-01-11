@@ -1,8 +1,11 @@
 package com.itcast.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.itcast.springboot.enums.SexEnum;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 //使用JPA注解配置映射关系
 @Entity  //告诉jpa这是一个实体类（和数据表映射的类）
@@ -13,13 +16,17 @@ public class User {
     private Integer id;
     @Column(name = "last_name",length = 50,nullable = false,unique=true,columnDefinition="varchar(50) comment '用户名称'") //这是数据库一列 nullable(是否允许为空)  unique(是否唯一)
     private String lastName;
-    @Column(name = "email",length = 30) //省略，默认列名就是属性名
+    @Column(name = "email",length = 30,columnDefinition="varchar(30) comment '电子邮件'") //省略，默认列名就是属性名
     private String email;
     @Transient //表示该属性并非一个到数据库表的字段映射
     private String phone;
     @Enumerated(EnumType.ORDINAL) //使用枚举的时候，我们希望数据库存储枚举对应的String值或枚举的索引值 ORDINAL  STRING
-    @Column(name = "sex",length = 5)
+    @Column(name = "sex",columnDefinition="tinyint comment '性别'")
     private SexEnum sex;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birthday",columnDefinition="date comment '出生日期'")
+    private Date birthday;
 
     public Integer getId() {
         return id;
@@ -61,6 +68,14 @@ public class User {
         this.sex = sex;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -68,7 +83,8 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", sex='" + sex + '\'' +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
                 '}';
     }
 }
