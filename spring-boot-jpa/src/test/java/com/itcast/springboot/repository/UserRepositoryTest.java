@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -20,9 +21,28 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * 保存
+     */
     @Test
     public void save(){
         User user = new User();
+        user.setLastName("hoo");
+        user.setEmail("3110708879@qq.com");
+        user.setSex(SexEnum.男);
+        user.setBirthday(new Date());
+        user.setPhone("18628466845");
+        User save = userRepository.save(user);
+        System.out.println(save);
+    }
+
+    /**
+     * 修改
+     */
+    @Test
+    public void update(){
+        User user = new User();
+        user.setId(1);
         user.setLastName("hss");
         user.setEmail("3110708879@qq.com");
         user.setSex(SexEnum.女);
@@ -89,6 +109,9 @@ public class UserRepositoryTest {
         System.out.println(exists);
     }
 
+    /**
+     * 条件查询
+     */
     @Test
     public void findUsersByLastNameIsStartingWithAndEmailContains(){
         String name = "ss";
@@ -99,4 +122,23 @@ public class UserRepositoryTest {
         System.out.println(users);
     }
 
+    /**
+     * 修改
+     */
+    @Test
+    @Transactional
+    public void updateEmailByUserId(){
+
+        userRepository.updateEmailByUserId(6,"133789456@qq.com");
+        System.out.println("------修改成功-----");
+    }
+
+    /**
+     * 删除
+     */
+    @Test
+    public void delete(){
+        userRepository.deleteById(5);
+        System.out.println("------删除成功-----");
+    }
 }
