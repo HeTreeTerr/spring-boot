@@ -1,18 +1,17 @@
 package com.itcast.springboot.repository;
 
+import com.itcast.springboot.dto.Users;
 import com.itcast.springboot.entity.User;
 import com.itcast.springboot.enums.SexEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,7 +26,7 @@ public class UserRepositoryTest {
     @Test
     public void save(){
         User user = new User();
-        user.setLastName("hoo");
+        user.setLastName("hop");
         user.setEmail("3110708879@qq.com");
         user.setSex(SexEnum.男);
         user.setBirthday(new Date());
@@ -42,12 +41,17 @@ public class UserRepositoryTest {
     @Test
     public void update(){
         User user = new User();
-        user.setId(1);
-        user.setLastName("hss");
-        user.setEmail("3110708879@qq.com");
-        user.setSex(SexEnum.女);
+        user.setId(11);
+        user.setLastName("hss1");
+        user.setEmail("3110708871@qq.com");
+        user.setSex(SexEnum.男);
         user.setBirthday(new Date());
-        user.setPhone("18628466845");
+        //user.setPhone("18628466845");
+        /**
+         * 由id查找记录，
+         * 有记录：修改
+         * 无记录：新增
+         */
         User save = userRepository.save(user);
         System.out.println(save);
     }
@@ -138,7 +142,54 @@ public class UserRepositoryTest {
      */
     @Test
     public void delete(){
-        userRepository.deleteById(5);
+
+        //由id删除
+        //userRepository.deleteById(5);
+
+        //删除表所有记录
+        //userRepository.deleteAll();
+
+        /**
+         * 重点还是在主键上
+         *  delete
+         *     from
+         *         tbl_user
+         *     where
+         *         id=?
+         */
+        //Optional<User> user = userRepository.findById(11);
+        /*User user = new User();
+        user.setId(12);
+        userRepository.delete(user);*/
+
+        Users users = new Users();
+
+        User user1 = new User();
+        user1.setId(13);
+
+        User user2 = new User();
+        user2.setId(14);
+
+        User[] usersArr = {user1,user2};
+        users.setUsers(usersArr);
+
+        userRepository.deleteAll(users);
         System.out.println("------删除成功-----");
+    }
+
+    @Test
+    public void pageQuery(){
+        int page = 0,size=10;
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+
+        User user = new User();
+        user.setEmail("3110708871@qq.com");
+        Example<User> example = Example.of(user);
+
+        //Page<User> userPage = userRepository.findAll(pageRequest);
+        Page<User> userPage = userRepository.findAll(example, pageRequest);
+        System.out.println(userPage.getContent());
     }
 }

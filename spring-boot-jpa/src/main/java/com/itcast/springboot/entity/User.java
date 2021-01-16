@@ -2,6 +2,8 @@ package com.itcast.springboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.itcast.springboot.enums.SexEnum;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.Date;
 
 //使用JPA注解配置映射关系
 @Entity  //告诉jpa这是一个实体类（和数据表映射的类）
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tbl_user") //来指定和那个数据表对应；如果省略，表名默认user
 public class User {
     @Id //这是一个主键
