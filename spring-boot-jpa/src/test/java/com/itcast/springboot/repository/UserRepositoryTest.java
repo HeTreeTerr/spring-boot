@@ -133,7 +133,8 @@ public class UserRepositoryTest {
         //List<User> users = userRepository.findUsersByLastNameIsStartingWithAndEmailContains(name, email);
         //List<User> users = userRepository.findUsersByLastNameIsStartingWith(name);
         //List<User> users = userRepository.findUsersByLastNameIsEndingWith(name);
-        List<User> user = userRepository.findUserById(4);
+        //List<User> user = userRepository.findUserById(4);
+        Optional<User> user = userRepository.findById(1);
         System.out.println(user);
     }
 

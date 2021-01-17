@@ -8,6 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 //使用JPA注解配置映射关系
 @Entity  //告诉jpa这是一个实体类（和数据表映射的类）
@@ -31,6 +33,11 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday",columnDefinition="date comment '出生日期'")
     private Date birthday;
+    /**
+     * mappedBy="user" 指Hobby中的属性值
+     */
+    @OneToMany(mappedBy="user",fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    private Set<Hobby> hobbySet = new HashSet<Hobby>();
 
     public Integer getId() {
         return id;
@@ -80,6 +87,14 @@ public class User {
         this.birthday = birthday;
     }
 
+    public Set<Hobby> getHobbySet() {
+        return hobbySet;
+    }
+
+    public void setHobbySet(Set<Hobby> hobbySet) {
+        this.hobbySet = hobbySet;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -89,6 +104,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", sex=" + sex +
                 ", birthday=" + birthday +
+                ", hobbySet=" + hobbySet +
                 '}';
     }
 }
