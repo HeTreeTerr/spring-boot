@@ -53,6 +53,9 @@ public class HobbyRepositoryTest {
         System.out.println("------删除成功-----");
     }
 
+    /**
+     * 列表查询
+     */
     @Test
     public void queryList(){
         List<Hobby> hobbyList = hobbyRepository.findAll();
