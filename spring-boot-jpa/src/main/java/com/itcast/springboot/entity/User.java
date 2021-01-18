@@ -39,6 +39,13 @@ public class User {
     @OneToMany(mappedBy="user",fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     private Set<Hobby> hobbySet = new HashSet<Hobby>();
 
+    public User() {
+    }
+
+    public User(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

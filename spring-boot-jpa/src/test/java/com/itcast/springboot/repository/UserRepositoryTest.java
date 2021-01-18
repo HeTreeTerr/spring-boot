@@ -1,6 +1,7 @@
 package com.itcast.springboot.repository;
 
 import com.itcast.springboot.dto.Users;
+import com.itcast.springboot.entity.Hobby;
 import com.itcast.springboot.entity.User;
 import com.itcast.springboot.enums.SexEnum;
 import org.junit.Test;
@@ -35,12 +36,22 @@ public class UserRepositoryTest {
      */
     @Test
     public void save(){
+        //基本信息
         User user = new User();
-        user.setLastName("hop");
+        user.setLastName("hss2");
         user.setEmail("3110708879@qq.com");
         user.setSex(SexEnum.男);
         user.setBirthday(new Date());
         user.setPhone("18628466845");
+        //爱好信息(在保存基础信息前，不能获取主键值。这种方法在新增场景下不可行)
+        /*Set<Hobby> hobbySet = new HashSet<Hobby>();
+        Hobby hobby1 = new Hobby("游戏");
+        Hobby hobby2 = new Hobby("绘画");
+        hobbySet.add(hobby1);
+        hobbySet.add(hobby2);
+
+        user.setHobbySet(hobbySet);*/
+
         User save = userRepository.save(user);
         System.out.println(save);
     }
@@ -50,18 +61,29 @@ public class UserRepositoryTest {
      */
     @Test
     public void update(){
-        User user = new User();
+        /*User user = new User();
         user.setId(11);
         user.setLastName("hss1");
         user.setEmail("3110708871@qq.com");
         user.setSex(SexEnum.男);
-        user.setBirthday(new Date());
-        //user.setPhone("18628466845");
+        user.setBirthday(new Date());*/
         /**
          * 由id查找记录，
          * 有记录：修改
          * 无记录：新增
          */
+        Optional<User> userOpt = userRepository.findById(17);
+        User user = userOpt.get();
+        user.setSex(SexEnum.女);
+
+        //一对多关系，修改场景中可以直接修改多（set<Object>）。遵循规律：存在则修改，不存在则新增。不想触发修改，则set<Object>对象赋值null
+        /*Set<Hobby> hobbySet = new HashSet<Hobby>();
+        Hobby hobby1 = new Hobby(7,"游戏123",new User(user.getId()));
+        Hobby hobby2 = new Hobby(8,"lol123",new User(user.getId()));
+        hobbySet.add(hobby1);
+        hobbySet.add(hobby2);
+        user.setHobbySet(hobbySet);*/
+
         User save = userRepository.save(user);
         System.out.println(save);
     }
@@ -133,8 +155,8 @@ public class UserRepositoryTest {
         //List<User> users = userRepository.findUsersByLastNameIsStartingWithAndEmailContains(name, email);
         //List<User> users = userRepository.findUsersByLastNameIsStartingWith(name);
         //List<User> users = userRepository.findUsersByLastNameIsEndingWith(name);
-        //List<User> user = userRepository.findUserById(4);
-        Optional<User> user = userRepository.findById(1);
+        List<User> user = userRepository.findUserById(15);
+        //Optional<User> user = userRepository.findById(15);
         System.out.println(user);
     }
 
@@ -169,12 +191,17 @@ public class UserRepositoryTest {
          *     where
          *         id=?
          */
-        //Optional<User> user = userRepository.findById(11);
-        /*User user = new User();
-        user.setId(12);
-        userRepository.delete(user);*/
+        Optional<User> userOpt = userRepository.findById(17);
+        User user = userOpt.get();
 
-        Users users = new Users();
+        /*User user = new User();
+        user.setId(15);*/
+        //在一对多的关系中，如果传入的对象拥有多（Set<Object>），则连同关系表一块清除。不想触发这设置set<object>为空
+        user.setHobbySet(null);
+        userRepository.delete(user);
+
+        //批量删除
+        /*Users users = new Users();
 
         User user1 = new User();
         user1.setId(13);
@@ -185,7 +212,7 @@ public class UserRepositoryTest {
         User[] usersArr = {user1,user2};
         users.setUsers(usersArr);
 
-        userRepository.deleteAll(users);
+        userRepository.deleteAll(users);*/
         System.out.println("------删除成功-----");
     }
 
