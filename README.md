@@ -44,7 +44,15 @@ springBoot整合druid数据源和mybatis，实现mysql数据库链接。
 
 ### 3.6spring-boot-web
 springBoot以thymeleaf作为模板引擎，搭建后台管理界面，提供功能模块的增删改查
-功能交互。
-访问地址：http://localhost:20000/crud/
-账号密码：admin/123456
+功能交互。  
+访问地址：http://localhost:20000/crud/  
+账号密码：admin/123456  
 **注意**：没有实现mysql访问，接口返回数据由HashMap提供
+
+## 3.7spring-boot-security
+springBoot整合springSecurity安全框架，实现用户权限管理。
+1. 在com.itcast.springboot.config.MySecurityConfig中，定义三个用户（hss、
+hww、lll），定义三个角色（VIP1、VIP2、VIP3）。指定用户和角色的关系，指定接口url
+和角色的关系。
+2. 访问http://localhost:8080/，分别使用不同的用户登录系统，实现不同角色用户，
+分配不同权限。
