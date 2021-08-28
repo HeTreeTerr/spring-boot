@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+//json返回时忽略该属性
 @JsonIgnoreProperties(value = {"user"})
 //使用JPA注解配置映射关系
 @Entity  //告诉jpa这是一个实体类（和数据表映射的类）
@@ -23,8 +24,26 @@ public class Hobby {
     private String hobbyName;
 
     @ManyToOne(fetch = FetchType.LAZY,targetEntity=User.class)
-    @JoinColumn(name="user_id")//默认即为:user_id,也可自定义
+    @JoinColumn(name="user_id",nullable = false)//默认即为:user_id,也可自定义
     private User user;
+
+    public Hobby() {
+    }
+
+    public Hobby(String hobbyName) {
+        this.hobbyName = hobbyName;
+    }
+
+    public Hobby(String hobbyName, User user) {
+        this.hobbyName = hobbyName;
+        this.user = user;
+    }
+
+    public Hobby(Integer id, String hobbyName, User user) {
+        this.id = id;
+        this.hobbyName = hobbyName;
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -48,5 +67,13 @@ public class Hobby {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Hobby{" +
+                "id=" + id +
+                ", hobbyName='" + hobbyName + '\'' +
+                '}';
     }
 }
