@@ -15,7 +15,7 @@ J2EE开发的一站式解决方案；
 如果历史ssm项目想升级使用springBoot，但是有jsp页面等历史包袱，全部升级重写代价太大。  
 可以在springBoot项目中使用外置的tomcat，以此达到在同一微服务中同时使用springBoot
 和jsp的目的。  
-**注意：**项目打包会生成war包，实属无奈之举，不推荐使用。
+**注意**：项目打包会生成war包，实属无奈之举，不推荐使用。
 
 ### 3.2spring-boot-jdbc
 springBoot整合druid数据源，通过JdbcTemplate工具类实现mysql数据库链接。
@@ -34,3 +34,17 @@ springBoot整合druid数据源和mybatis，实现mysql数据库链接。
 4. 在com.itcast.springboot.mapper.DepartmentMapper类中定义sql语句。
 5. 在com.itcast.springboot.controller.DeptController.addDept方法
 上，使用jsr303效验
+
+### 3.5spring-boot-task
+使用springBoot自带的定时任务框架，启动定时任务。
+1. 在com.hss.springboot.service.ScheduledService.hello方法上，标注
+@Scheduled，定义cron表达式，实现简单的定时任务。
+2. 在com.hss.springboot.service.AsynService.hello方法上，标注@Async，
+实现异步方法调用。
+
+### 3.6spring-boot-web
+springBoot以thymeleaf作为模板引擎，搭建后台管理界面，提供功能模块的增删改查
+功能交互。
+访问地址：http://localhost:20000/crud/
+账号密码：admin/123456
+**注意**：没有实现mysql访问，接口返回数据由HashMap提供
