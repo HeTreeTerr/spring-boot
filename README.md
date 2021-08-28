@@ -62,3 +62,17 @@ springBoot默认日志框架logback，设定日志路径、级别、格式配置
 1. 在application.properties中配置日志属性。
 2. 在logback-spring.xml中配置日志文件属性。
 
+### 3.8spring-boot-deploy
+springBoot项目热部署，开发神器。在修改代码后，不用重启服务，使用快捷键：ctrl+f9，
+改动即可生效。
+
+1. http://localhost:8080/abc即可访问templates/hello.html页面。
+2. 修改templates/hello.html，idea中ctrl+f9后，刷新浏览器页面，发现修改以生效。
+```xml
+<!-- pom中引入，热部署模块 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+```
