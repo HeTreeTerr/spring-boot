@@ -70,11 +70,11 @@ springBoot项目热部署，开发神器。在修改代码后，不用重启服�
 2. 修改templates/hello.html，idea中ctrl+f9后，刷新浏览器页面，发现修改以生效。
 ```xml
 <!-- pom中引入，热部署模块 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+</dependency>
 ```
 
 ### 3.10spring-boot-actuaor
@@ -91,20 +91,20 @@ http://localhost:8080/actuator/info
 描述配置属性（包含默认值）如何注入到bean  
 http://localhost:8080/actuator/configprops
 
-4.  /beans GET
-描述程序中的bean，及之间的依赖关系
+4. /beans GET
+描述程序中的bean，及之间的依赖关系  
 http://localhost:8080/actuator/beans
 
-5. /env GET
-获取全部环境属性
+5. /env GET  
+获取全部环境属性  
 http://localhost:8080/actuator/env
 
-6. /env/{name} GET  
-根据名称获取指定的环境属性值
+6. /env/{name} GET    
+根据名称获取指定的环境属性值  
 http://localhost:8080/actuator/env/test
 
 7. /mappings GET  
-描述全部的URI路径，及和控制器的映射关系
+描述全部的URI路径，及和控制器的映射关系  
 http://localhost:8080/actuator/mappings
 
 8. /metrics/{requiredMetricName} GET  
@@ -158,4 +158,59 @@ http://localhost:8080/actuator/refresh
 18. /shutdown POST
 关闭应用程序，慎用
 http://localhost:8080/actuator/shutdown  
-请求404，可能是springboot版本太低
+需要显示的配置，启动远程关闭功能
+
+### 3.11boot-excel
+excel文件导入及下载
+1. excel导出 ip:port/exportUser
+
+2. excel导入 ip:port/importUser
+
+### 3.12spring-boot-cache
+>以下模块，都是为了学习cache而存在
+spring-boot-cache  
+spring-boot-cache-01  
+spring-boot-cache-02  
+
+springBoot整合连接mysql数据库和redis。  
+使用@CacheConfig同步数据库和redis数据，减小数据库压力
+
+### 3.13spring-boot-amqp
+>以下模块，都是为了学习消息队列而存在  
+spring-boot-amqp  
+spring-boot-15
+
+springBoot整个rabbitMq，实现基本的提供者生产消息，消费者处理消息
+
+### 3.14spring-boot-dubbo
+使用dubbo作为rpc远程通讯工具，实现消费者和提供者间的远程调用
+* 提供者provider-ticket
+* 消费者consumer-user
+
+在com.hss.user.service.UserServiceTest.getTicket单元测试方法中，
+测试远程方法调用。
+
+### 3.15spring-boot-elastic
+springBoot整合elasticSearch，实现索引创建、数据插入、数据查询
+
+### 3.16spring-boot-starter
+>以下模块，都是为了写自己的spring-boot-starter而存在  
+spring-boot-starter，产出自定义的starter;
+spring-boot-start，pom文件中引用并使用;
+
+```xml
+<dependency>
+    <groupId>com.hss.starter</groupId>
+    <artifactId>hss-spring-boot-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+### 3.17spring-cloud
+springCloud基本使用
+* eureka-server，服务注册中心
+* provider-ticket，服务的提供者
+* consumer-user，服务的消费者
+
+服务启动后，在consumer-user模块的com.hss.consumeruser.controller
+.UserController.buyTicket方法中，可以测试远程调用。
