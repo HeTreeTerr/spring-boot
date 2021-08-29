@@ -9,7 +9,7 @@ public class MyappHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
         //自定义检查方法
-       return Health.down().withDetail("msg","原地爆炸").build();
-//        return Health.up().build();
+//       return Health.down().withDetail("msg","原地爆炸").build();
+        return Health.up().build();
     }
 }

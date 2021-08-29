@@ -62,7 +62,7 @@ springBoot默认日志框架logback，设定日志路径、级别、格式配置
 1. 在application.properties中配置日志属性。
 2. 在logback-spring.xml中配置日志文件属性。
 
-### 3.8spring-boot-deploy
+### 3.9spring-boot-deploy
 springBoot项目热部署，开发神器。在修改代码后，不用重启服务，使用快捷键：ctrl+f9，
 改动即可生效。
 
@@ -76,3 +76,86 @@ springBoot项目热部署，开发神器。在修改代码后，不用重启服�
             <scope>runtime</scope>
         </dependency>
 ```
+
+### 3.10spring-boot-actuaor
+springBoot自带的监控神器Actuator。
+1. /health/{component}/{instance} GET  
+报告程序的健康指标，这些数据由HealthIndicator实现类提供
+http://localhost:8080/actuator/health/
+
+2.  /info GET  
+获取程序指定发布的信息，这些信息由配置文件中info打头的属性提供  
+http://localhost:8080/actuator/info
+
+3. /configprops GET  
+描述配置属性（包含默认值）如何注入到bean  
+http://localhost:8080/actuator/configprops
+
+4.  /beans GET
+描述程序中的bean，及之间的依赖关系
+http://localhost:8080/actuator/beans
+
+5. /env GET
+获取全部环境属性
+http://localhost:8080/actuator/env
+
+6. /env/{name} GET  
+根据名称获取指定的环境属性值
+http://localhost:8080/actuator/env/test
+
+7. /mappings GET  
+描述全部的URI路径，及和控制器的映射关系
+http://localhost:8080/actuator/mappings
+
+8. /metrics/{requiredMetricName} GET  
+统计程序的各种度量信息，如内存用量和请求数  
+http://localhost:8080/actuator/metrics
+
+9. /httptrace GET  
+提供基本的http请求跟踪信息，如请求头等  
+http://localhost:8080/actuator/httptrace  
+请求404，可能是springboot版本太低
+
+10. /threaddump GET  
+获取线程活动的快照  
+http://localhost:8080/actuator/threaddump  
+请求404，可能是springboot版本太低
+
+11. /conditions GET  
+提供自动配置报告，记录哪些自动配置通过，哪些没有通过  
+http://localhost:8080/actuator/conditions  
+请求404，可能是springboot版本太低
+
+12. /loggers/{name} GET  
+查看日志配置信息  
+http://localhost:8080/actuator/loggers
+
+13. /auditevents GET  
+查看系统发布的事件信息  
+http://localhost:8080/actuator/auditevents
+
+14. /caches/{cache} GET/DELETE  
+查看系统的缓存管理器，另可根据缓存管理器名称查询；  
+另DELETE操作可清除缓存  
+http://localhost:8080/actuator/caches  
+请求404，可能是springboot版本太低
+
+15. /scheduledtasks GET  
+查看系统发布的定时任务信息  
+http://localhost:8080/actuator/scheduledtasks
+请求404，可能是springboot版本太低
+
+16. /features GET
+查看Springcloud全家桶组件信息
+http://localhost:8080/actuator/features  
+请求404，可能是springboot版本太低
+
+17. /refresh POST  
+重启应用程序，慎用  
+http://localhost:8080/actuator/refresh  
+请求404，可能是springboot版本太低
+
+18. /shutdown POST
+关闭应用程序，慎用
+http://localhost:8080/actuator/shutdown  
+请求404，可能是springboot版本太低
