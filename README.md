@@ -167,7 +167,7 @@ excel文件导入及下载
 2. excel导入 ip:port/importUser
 
 ### 3.12spring-boot-cache
->以下模块，都是为了学习cache而存在
+>以下模块，都是为了学习cache而存在  
 spring-boot-cache  
 spring-boot-cache-01  
 spring-boot-cache-02  
@@ -180,7 +180,7 @@ springBoot整合连接mysql数据库和redis。
 spring-boot-amqp  
 spring-boot-15
 
-springBoot整个rabbitMq，实现基本的提供者生产消息，消费者处理消息
+springBoot整和rabbitMq，实现基本的提供者生产消息，消费者处理消息
 
 ### 3.14spring-boot-dubbo
 使用dubbo作为rpc远程通讯工具，实现消费者和提供者间的远程调用
