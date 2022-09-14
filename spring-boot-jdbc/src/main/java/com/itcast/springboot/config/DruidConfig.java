@@ -45,6 +45,7 @@ public class DruidConfig {
         servletRegistrationBean.setInitParameters(initParameters);
         return servletRegistrationBean;
     }
+
     //2.配置监控的filter
     @Bean
     public FilterRegistrationBean<Filter> webStatFilter(){

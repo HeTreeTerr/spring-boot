@@ -129,7 +129,7 @@
     <logger name="com.github.miemiedev.mybatis.paginator" level="INFO" additivity="false" />
 
     <!-- Logger 根目录 -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DEBUG" />
         <appender-ref ref="ERROR" />

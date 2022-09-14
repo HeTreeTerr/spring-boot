@@ -15,13 +15,18 @@ import java.sql.SQLException;
 public class SpringBootJdbcApplicationTests {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+
     @Test
-    public void contextLoads() throws SQLException {
+    public void contextLoads(){
+        System.out.println("4396");
+    }
+
+    @Test
+    public void dbConnection() throws SQLException{
         System.out.println(dataSource.getClass());
-         Connection connection = dataSource.getConnection();
+        Connection connection = dataSource.getConnection();
         System.out.println(connection);
         connection.close();
     }
-
 }
