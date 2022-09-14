@@ -8,6 +8,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.Filter;
@@ -33,8 +35,11 @@ public class DruidConfig {
         return new DruidDataSource();
     }
 
-    //配置Druid的监控
-    //1.配置一个管理后台的servlet
+    /**
+     * 配置Druid的监控
+     * 1.配置一个管理后台的servlet
+     * @return
+     */
     @Bean
     public ServletRegistrationBean<Servlet> statViewServlet(){
         ServletRegistrationBean<Servlet> servletRegistrationBean = new ServletRegistrationBean<>();
@@ -52,7 +57,10 @@ public class DruidConfig {
         return servletRegistrationBean;
     }
 
-    //2.配置监控的filter
+    /**
+     * 2.配置监控的filter
+     * @return
+     */
     @Bean
     public FilterRegistrationBean<Filter> webStatFilter(){
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
@@ -65,5 +73,16 @@ public class DruidConfig {
         filterRegistrationBean.addUrlPatterns("/*");
         //filterRegistrationBean.setUrlPatterns(Arrays.asList("/*"));
         return filterRegistrationBean;
+    }
+
+    /**
+     * 配置事务管理器
+     * springBoot 已默认装配
+     * @param dataSource
+     * @return
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
     }
 }
