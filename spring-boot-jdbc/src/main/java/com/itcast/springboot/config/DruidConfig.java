@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
@@ -18,6 +19,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @EnableTransactionManagement 开启基于注解的事务管理功能
+ * springBoot 默认开启
+ */
+@EnableTransactionManagement
 @Configuration
 public class DruidConfig {
 

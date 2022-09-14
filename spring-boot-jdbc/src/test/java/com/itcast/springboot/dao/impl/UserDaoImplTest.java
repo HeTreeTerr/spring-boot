@@ -33,8 +33,8 @@ public class UserDaoImplTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setId(3);
-        user.setName("ls");
+        user.setId(4);
+        user.setName("ww");
         userDao.insert(user);
         System.out.println("操作成功！");
     }

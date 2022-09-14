@@ -5,6 +5,7 @@ import com.itcast.springboot.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.queryForList("select * from tbl_user");
     }
 
+    @Transactional
     @Override
     public void insert(User user) {
         String sql = "insert into `tbl_user`(id,name) values(?,?)";
