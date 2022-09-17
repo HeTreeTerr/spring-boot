@@ -33,6 +33,7 @@ public class MyServerConfig {
             }
         };
     }
+
     //设置servet.一个函数可以设置一个servlet文件.一个servlet文件可以有多个路径
     //@Bean
     public ServletRegistrationBean<Servlet> myServlet(){
@@ -46,6 +47,7 @@ public class MyServerConfig {
 //        servletRegistrationBean.addUrlMappings("/myServlet2");
         return  servletRegistrationBean;
     }
+
     //@Bean
     public ServletRegistrationBean<Servlet> myServlet1(){
         ServletRegistrationBean<Servlet> servletRegistrationBean = new ServletRegistrationBean<>();
@@ -55,6 +57,7 @@ public class MyServerConfig {
         servletRegistrationBean.setLoadOnStartup(1);
         return  servletRegistrationBean;
     }
+
     //设置Filter拦截器
     //@Bean
     public FilterRegistrationBean<Filter> myFilter(){
@@ -65,6 +68,7 @@ public class MyServerConfig {
         //filterRegistrationBean.
         return filterRegistrationBean;
     }
+
     //@Bean
     public ServletListenerRegistrationBean<ServletContextListener> myListener(){
         ServletListenerRegistrationBean<ServletContextListener> contextListenerServletListenerRegistrationBean
