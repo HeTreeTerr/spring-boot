@@ -14,13 +14,15 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EmployeeMapperTest {
+
     @Autowired
-    EmployeeMapper mapper;
-    //记录器
+    private EmployeeMapper mapper;
+
     Logger logger = LoggerFactory.getLogger(getClass());
+
     @Test
     public void getEmpById() {
-        Employee emp = mapper.getEmpById(2);
+        Employee emp = mapper.getEmpById(1);
         logger.info("--------->emp={}",emp);
         Assert.assertNotNull(emp);
     }
@@ -48,7 +50,6 @@ public class EmployeeMapperTest {
         emp.setGender(1);
         emp.setdId(9);
         mapper.insertEmp(emp);
-
     }
 
     @Test

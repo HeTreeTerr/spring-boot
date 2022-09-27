@@ -17,7 +17,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void getEmp() {
-        Employee emp = employeeService.getEmp(11);
+        Employee emp = employeeService.getEmp(1);
         System.out.println(emp);
     }
     @Test
