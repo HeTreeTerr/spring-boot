@@ -4,7 +4,7 @@
 <mapper namespace="com.itcast.springboot.mapper.EmployeeMapper">
 
     <!--public Employee getEmpById(Integer id);-->
-    <select id="getEmpById" resultType="com.itcast.springboot.bean.Employee">
+    <select id="getEmpById" resultType="com.itcast.springboot.com.hss.bean.Employee">
         select * from employee where id=#{id}
     </select>
     <!--public void insertEmp(Employee employee);-->
