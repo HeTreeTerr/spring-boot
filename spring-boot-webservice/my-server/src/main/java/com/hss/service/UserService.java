@@ -9,7 +9,7 @@ import javax.jws.WebService;
 /**
  * 用户逻辑层
  */
-@WebService(targetNamespace = "service.hss.com",name = "userPortType")
+@WebService(name = "UserService",targetNamespace = "http://service.hss.com")
 public interface UserService {
 
     /**
@@ -18,5 +18,5 @@ public interface UserService {
      * @return
      */
     @WebMethod
-    User getUserName(@WebParam(name = "name")String name);
+    String getUserName(@WebParam(name = "name")String name);
 }

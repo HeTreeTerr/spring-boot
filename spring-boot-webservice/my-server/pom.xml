@@ -17,12 +17,17 @@
             <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
             <version>3.2.5</version>
         </dependency>
-        
-        <!--不引入会报错，报接口未实现-->
+
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.0.18.Final</version>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>3.1.6</version>
         </dependency>
     </dependencies>
 </project>
