@@ -1,5 +1,6 @@
 # spring-boot-webservice
-> 摘自：https://www.cnblogs.com/aerfazhe/p/16093653.html
+> 摘自：https://www.cnblogs.com/aerfazhe/p/16093653.html  
+> 新博客参考：https://blog.csdn.net/qq_43842093/article/details/123076587
 
 ## 1 子模块介绍
 * my-server(服务提供模块)
