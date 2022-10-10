@@ -1,8 +1,7 @@
 # spring-boot-webservice
-> 摘自：https://www.cnblogs.com/aerfazhe/p/16093653.html  
-> 新博客参考：  
-> https://blog.csdn.net/qq_43842093/article/details/123076587  
-> https://blog.csdn.net/xuming9/article/details/78127354?spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-7-78127354-blog-106682506.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-7-78127354-blog-106682506.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=8
+> 博客参考   
+> 基础搭建：https://blog.csdn.net/qq_43842093/article/details/123076587  
+> bug解决：https://blog.csdn.net/xuming9/article/details/78127354?spm=1001.2101.3001.6650.7&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-7-78127354-blog-106682506.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-7-78127354-blog-106682506.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=8
 
 ## 1 子模块介绍
 * my-server(服务提供模块)
