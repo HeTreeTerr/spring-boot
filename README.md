@@ -214,3 +214,7 @@ springCloud基本使用
 
 服务启动后，在consumer-user模块的com.hss.consumeruser.controller
 .UserController.buyTicket方法中，可以测试远程调用。
+
+### 3.18spring-boot-webservice
+springBoot整合webservice，实现RPC远程调用。  
+项目启动测试可以参考：spring-boot-webservice/help.md
