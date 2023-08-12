@@ -15,3 +15,5 @@ http://localhost:8001/ws/user?wsdl
 ### 2.2 my-client
 调用单元测试，确认通讯
 com.hss.wsdl.UserServiceTest#getUserName
+访问URL，确认通讯
+http://localhost:8080/getUserName?name=hss

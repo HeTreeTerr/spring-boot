@@ -1,0 +1,6 @@
+com:
+  hss:
+    webservice:
+      url: http://localhost:8001/ws/user?wsdl
+    methodName:
+      getUserName: getUserName
